@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Message with Envelope</title>
+        <link rel="stylesheet" href="message.css"
+</head>
+<body>
+  <div class="container" role="main" aria-label="Message envelope interactive demo">
+    <h1>You've got mail!</h1>
+    <p class="subtitle">Click the envelope to open your message</p>
+    <button aria-pressed="false" aria-controls="messageCard" class="envelope closed" id="envelopeBtn" aria-label="Envelope toggle button">
+      <div class="envelope-inner">
+        <div class="envelope-flap"></div>
+        <div class="envelope-base"></div>
+        <div class="envelope-lines" aria-hidden="true">
+          <svg viewBox="0 0 200 140" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true" focusable="false">
+            <polyline points="0,140 100,65 200,140"></polyline>
+            <line x1="0" y1="0" x2="0" y2="140" />
+            <line x1="200" y1="0" x2="200" y2="140" />
+            <line x1="100" y1="65" x2="100" y2="140" />
+            <line x1="0" y1="0" x2="100" y2="65" />
+            <line x1="200" y1="0" x2="100" y2="65" />
+            <line x1="0" y1="0" x2="200" y2="0" />
+          </svg>
+        </div>
+      </div>
+    </button>
+    <article id="messageCard" class="message-card" role="region" aria-live="polite" tabindex="0" aria-hidden="true">
+      <p>
+        I deeply apologize for my action, sorry if I'm becoming a toxic person,
+        I dont fcking know what going on with me hindi naman ako ganito dati
+        pasensya kung nasaktan ka at nabigyan ng trauma. I didn't mean trust me
+        I love you, I love you from the bottom of my heart, mas mahal
+        pa kita kaysa sarili ko
+      </p>
+    </article>
+  </div>
+<script src="script.js"></script>
+

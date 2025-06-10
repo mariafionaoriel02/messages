@@ -1,0 +1,158 @@
+  :root {
+    --bg-color: #f2aeae;
+    --text-color: #060708; /* neutral gray */
+    --primary-color: #111827; /* dark text */
+    --envelope-color: #374151; /* dark gray */
+    --card-bg: #faf7f7;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --transition-speed: 0.3s;
+    --border-radius: 0.75rem;
+  }
+
+
+    * {
+    box-sizing: border-box;
+  }
+
+  body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: var(--bg-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Inter', system-ui, sans-serif;
+    color: var(--text-color);
+  }
+
+  .container {
+    max-width: 420px;
+    width: 90vw;
+    text-align: center;
+    user-select: none;
+  }
+
+  .envelope {
+    position: relative;
+    width: 200px;
+    height: 140px;
+    margin: 0 auto 2.5rem;
+    cursor: pointer;
+    perspective: 800px;
+  }
+
+  .envelope-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform var(--transition-speed) cubic-bezier(0.4,0.0,0.2,1);
+  }
+  /* Envelope closed */
+  .envelope.closed .envelope-inner {
+    transform: rotateX(0deg);
+  }
+  /* Envelope opened - front flap lifts */
+  .envelope.opened .envelope-inner {
+    transform: rotateX(-110deg);
+  }
+
+  /* Envelope base */
+  .envelope-base {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 10px var(--shadow-color);
+    border: 1px solid #030303;
+    backface-visibility: hidden;
+  }
+
+  /* Envelope flap */
+  .envelope-flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: var(--envelope-color);
+    border-top-left-radius: var(--border-radius);
+    border-top-right-radius: var(--border-radius);
+    clip-path: polygon(0 100%, 50% 0%, 100% 100%);
+    transform-origin: top center;
+    backface-visibility: hidden;
+    box-shadow: 0 3px 6px rgba(174, 231, 243, 0.12);
+    transition: background var(--transition-speed);
+  }
+
+  .envelope:hover .envelope-flap {
+    background: #4b5563;
+  }
+
+  /* Message card inside */
+  .message-card {
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 20px var(--shadow-color);
+    padding: 2rem 2.5rem;
+    color: var(--primary-color);
+    font-size: 1.125rem;
+    line-height: 1.6;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity var(--transition-speed) ease, max-height var(--transition-speed) ease;
+  }
+
+  /* Show message card when envelope opened */
+  .envelope.opened ~ .message-card {
+    opacity: 1;
+    max-height: 400px;
+    margin-top: 1rem;
+  }
+
+  /* Envelope icon lines for subtle detail */
+  .envelope-lines {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+  }
+  .envelope-lines svg {
+    width: 100%;
+    height: 100%;
+    stroke: var(--envelope-color);
+    stroke-width: 1.5;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    fill: none;
+  }
+
+  /* Headline */
+  h1 {
+    font-weight: 700;
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+  }
+  /* Subtitle */
+  p.subtitle {
+    color: #6b7280;
+    font-size: 1rem;
+    margin-top: 0;
+    margin-bottom: 3rem;
+  }
+
+  /* Micro interaction scale on hover */
+  .envelope:hover .envelope-inner {
+    transform: rotateX(-10deg) scale(1.03);
+    transition: transform 0.2s ease;
+  }
+  /* When opened, keep scale consistent */
+  .envelope.opened:hover .envelope-inner {
+    transform: rotateX(-110deg) scale(1.03);
+  }
